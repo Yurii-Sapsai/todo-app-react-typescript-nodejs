@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/todo-app-react-typescript-nodejs/client/static/css/main.31690426.css",
+    "main.js": "/todo-app-react-typescript-nodejs/client/static/js/main.3bed52be.js",
+    "index.html": "/todo-app-react-typescript-nodejs/client/index.html",
+    "main.31690426.css.map": "/todo-app-react-typescript-nodejs/client/static/css/main.31690426.css.map",
+    "main.3bed52be.js.map": "/todo-app-react-typescript-nodejs/client/static/js/main.3bed52be.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31690426.css",
+    "static/js/main.3bed52be.js"
+  ]
+}
