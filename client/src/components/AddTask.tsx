@@ -8,6 +8,7 @@ import { addTask } from '../store/taskSlice/TaskSlice';
 import { BASE_URL } from '../const/URL';
 
 
+
 const Form = styled.form({
     display: "flex",
     justifyContent: "space-between"
@@ -36,6 +37,8 @@ const AddTask: FC = () => {
 
     const dispatch = useDispatch();
 
+
+
     const { register,
         handleSubmit,
         formState: {
@@ -44,6 +47,8 @@ const AddTask: FC = () => {
         reset
     } = useForm({ mode: 'onBlur' });
 
+
+    
     const onSubmit = async (data: any) => {
         try {
             await axios.post(BASE_URL, { task: data.task })

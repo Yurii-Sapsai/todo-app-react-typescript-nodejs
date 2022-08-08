@@ -1,12 +1,14 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import useDoubleClick from 'use-double-click';
-import axios from 'axios';
-import { BASE_URL } from '../const/URL';
 
+import useDoubleClick from 'use-double-click';
 import { useAppDispatch } from '../store/hooks';
 import { updateTaskStatus, updateTaskStatusFalse, updateTask, removeTask } from '../store/taskSlice/TaskSlice';
+import { BASE_URL } from '../const/URL';
+
+
 
 type TaskItemProps = {
     task: string,
@@ -18,7 +20,7 @@ const Wrapper = styled.div({
     display: "flex",
     justifyContent: "space-between",
     marginBottom: '10px'
-})
+});
 
 const Input = styled.input({
     height: "40px",
@@ -27,7 +29,7 @@ const Input = styled.input({
     paddingLeft: "10px",
     border: 'none',
     borderLeft: '1px gray solid'
-})
+});
 
 const Button = styled.button({
     height: "40px",
@@ -37,7 +39,7 @@ const Button = styled.button({
     background: "#DC143C",
     border: "1px solid #DC143C",
     cursor: 'pointer'
-})
+});
 
 const inputStyle = {
     textDecorationLine: 'line-through',
@@ -89,16 +91,17 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
                 await axios.patch(`${BASE_URL}${_id}`, { task: newItem })
                     .then(() => {
                         dispatch(updateTask({ _id, newItem }));
-
                         setDisabled(true)
                     })
             } catch (e) {
                 console.warn(e);
             }
         } else{
-            removeItem(_id)
+            removeItem(_id);
         }
     }
+
+
 
     const removeItem = async (_id: string) => {
         try {

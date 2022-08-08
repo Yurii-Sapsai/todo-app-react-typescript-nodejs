@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "homepage": "https://yurii-sapsai.github.io/todo-app-react-typescript-nodejs/client",
+  "homepage": "https://yurii-sapsai.github.io/todo-app-react-typescript-nodejs/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.0",

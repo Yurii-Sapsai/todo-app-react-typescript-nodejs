@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://todo-app-server-nodejs.herokuapp.com/tasks/'
+export const BASE_URL = 'https://todo-app-server-nodejs.herokuapp.com/tasks/';

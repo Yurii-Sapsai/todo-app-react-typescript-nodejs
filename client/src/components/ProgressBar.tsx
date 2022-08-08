@@ -12,8 +12,7 @@ const Wrapper = styled.div({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingRight: '25px'
-})
+});
 
 const ProgressBar: FC = () => {
 
@@ -22,7 +21,7 @@ const ProgressBar: FC = () => {
 
     useEffect(() => {
         calculationOfComplitedTasks(store.tasks);
-    }, [store.tasks])
+    }, [store.tasks]);
 
     function calculationOfComplitedTasks(tasks: Task[]) {
 
@@ -39,7 +38,7 @@ const ProgressBar: FC = () => {
     return (
         <Wrapper >
             <p style={{ fontSize: '14px', marginBottom: '10px' }}>  Completed tasks: </p>
-            <div style={{ width: '100px', height: '100px' }}>
+            <div style={{ width: '50%', height: '50%' }}>
                 <CircularProgressbar value={percentageOfCompletedTasks} text={`${percentageOfCompletedTasks | 0}%`} strokeWidth={5} />
             </div>
         </Wrapper >

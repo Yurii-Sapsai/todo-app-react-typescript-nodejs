@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useAppSelector, useAppDispatch } from '../store/hooks';
@@ -12,37 +12,36 @@ const Wrapper = styled.div({
     background: 'white',
     minHeight: '500px',
     maxHeight: '100%',
-    minWidth: '500px',
+    minWidth: '34%',
     borderRadius: '10px',
     padding: '25px',
     margin: '25px'
-})
+});
 
 const Title = styled.h1({
     marginBottom: "25px"
-})
+});
 
 const SearchInput = styled.input({
-    width: "60%",
+    width: "100%",
     height: "40px",
     paddingLeft: "10px",
     fontSize: "18px"
-})
+});
 
 const Layout: FC = () => {
 
     const store = useAppSelector((state) => state.tasks);
     const dispatch = useAppDispatch();
-    console.log(store)
     const [searchTask, setSearchTask] = useState<string>('');
 
     useEffect(() => {
         dispatch(fetchTasksAPI());
-    }, [])
+    }, []);
 
     const filteredTasks = store.tasks.filter((item) => {
         return item.task.toLowerCase().includes(searchTask.toLowerCase());
-    })
+    });
 
     return (
         <Wrapper>
@@ -56,7 +55,9 @@ const Layout: FC = () => {
             {filteredTasks.map((item) => (
                 <TaskItem task={item.task} status={item.status} _id={item._id} key={item._id} />
             ))}
+
             <br />
+            
             <AddTask />
         </Wrapper>
     )

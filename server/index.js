@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import tasksRoutes from './routes/tasks.js'
+import tasksRoutes from './routes/tasks.js';
 
 
 
@@ -15,9 +15,6 @@ dotenv.config();
 
 
 app.use('/tasks', tasksRoutes);
-app.use('/', (req,res)=>{
-    res.json('hello word');
-})
 
 
 
