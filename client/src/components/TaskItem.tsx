@@ -1,12 +1,20 @@
 import React, { FC, useRef, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 import useDoubleClick from 'use-double-click';
 import { useAppDispatch } from '../store/hooks';
-import { updateTaskStatus, updateTaskStatusFalse, updateTask, removeTask } from '../store/taskSlice/TaskSlice';
-import { BASE_URL } from '../const/URL';
+import {
+    updateTaskStatus,
+    updateTaskStatusFalse,
+    updateTask,
+    removeTask
+} from '../store/taskSlice/TaskSlice';
+import {
+    updateTaskStatusAPI,
+    updateTaskAPI,
+    removeTaskAPI
+} from '../api/taskApi'
 
 
 
@@ -62,9 +70,9 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
     useDoubleClick({
         onSingleClick(e) {
             if (disabled) {
-                (async () => {
+                (() => {
                     try {
-                        await axios.patch(`${BASE_URL}${_id}`, { status: !status })
+                        updateTaskStatusAPI(_id, status)
                             .then(() => {
                                 dispatch(updateTaskStatus(_id));
                             })
@@ -75,6 +83,7 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
             }
         },
         onDoubleClick(e) {
+            
             setDisabled(false)
             dispatch(updateTaskStatusFalse(_id))
 
@@ -85,10 +94,10 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
 
 
 
-    const updateItem = async (_id: string, newItem: string) => {
+    const updateItem = (_id: string, newItem: string) => {
         if (newItem) {
             try {
-                await axios.patch(`${BASE_URL}${_id}`, { task: newItem })
+                updateTaskAPI(_id, newItem)
                     .then(() => {
                         dispatch(updateTask({ _id, newItem }));
                         setDisabled(true)
@@ -96,16 +105,16 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
             } catch (e) {
                 console.warn(e);
             }
-        } else{
+        } else {
             removeItem(_id);
         }
     }
 
 
 
-    const removeItem = async (_id: string) => {
+    const removeItem = (_id: string) => {
         try {
-            await axios.delete(`${BASE_URL}${_id}`)
+            removeTaskAPI(_id)
                 .then(() => {
                     dispatch(removeTask(_id));
                 })
@@ -129,7 +138,7 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
                     onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />
             </div>
-            <Button onClick={() => removeItem(_id)}><DeleteForeverOutlinedIcon/></Button>
+            <Button onClick={() => removeItem(_id)}><DeleteForeverOutlinedIcon /></Button>
         </Wrapper>
     )
 }

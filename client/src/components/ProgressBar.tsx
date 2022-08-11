@@ -5,7 +5,7 @@ import "react-circular-progressbar/dist/styles.css";
 import styled from 'styled-components';
 
 import { useAppSelector } from '../store/hooks';
-import { Task } from '../interfaces/Task';
+import { ITask } from '../interfaces/Task';
 
 const Wrapper = styled.div({
     display: 'flex',
@@ -23,7 +23,7 @@ const ProgressBar: FC = () => {
         calculationOfComplitedTasks(store.tasks);
     }, [store.tasks]);
 
-    function calculationOfComplitedTasks(tasks: Task[]) {
+    function calculationOfComplitedTasks(tasks: ITask[]) {
 
         let amountTasks: number = tasks.length;
         let completedTasks: number = 0;

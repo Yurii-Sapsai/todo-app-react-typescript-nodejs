@@ -3,10 +3,10 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import { fetchTasksAPI } from './asyncAction';
 
-import { Task } from '../../interfaces/Task';
+import { ITask } from '../../interfaces/Task';
 
 type TasksState = {
-    tasks: Task[],
+    tasks: ITask[],
     isLoading: Boolean,
     error: String
 }
@@ -21,7 +21,7 @@ export const taskSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        addTask(state, action: PayloadAction<Task>) {
+        addTask(state, action: PayloadAction<ITask>) {
 
             let newState = state.tasks
             newState.push(action.payload)
@@ -62,7 +62,7 @@ export const taskSlice = createSlice({
         }
     },
     extraReducers: {
-        [fetchTasksAPI.fulfilled.type]: (state, action: PayloadAction<Task[]>) => {
+        [fetchTasksAPI.fulfilled.type]: (state, action: PayloadAction<ITask[]>) => {
             state.isLoading = false;
             state.tasks = action.payload;
             state.error = '';

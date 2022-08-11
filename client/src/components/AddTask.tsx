@@ -1,11 +1,10 @@
 import { FC } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../store/taskSlice/TaskSlice';
-import { BASE_URL } from '../const/URL';
+import { sendTaskAPI } from '../api/taskApi';
 
 
 
@@ -37,8 +36,6 @@ const AddTask: FC = () => {
 
     const dispatch = useDispatch();
 
-
-
     const { register,
         handleSubmit,
         formState: {
@@ -48,10 +45,11 @@ const AddTask: FC = () => {
     } = useForm({ mode: 'onBlur' });
 
 
-    
-    const onSubmit = async (data: any) => {
+
+
+    const onSubmit = (data: any) => {
         try {
-            await axios.post(BASE_URL, { task: data.task })
+            sendTaskAPI(data)
                 .then((res) => {
                     dispatch(addTask(res.data));
                 })
@@ -61,6 +59,9 @@ const AddTask: FC = () => {
         }
     }
 
+
+
+    
     return (
         <>
             {errors?.task?.message && <span style={{ color: 'red' }}>Maximum 255 characters available</span>}
