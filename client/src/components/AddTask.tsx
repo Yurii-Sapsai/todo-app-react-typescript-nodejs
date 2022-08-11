@@ -48,20 +48,19 @@ const AddTask: FC = () => {
 
 
     const onSubmit = (data: any) => {
-        try {
-            sendTaskAPI(data)
-                .then((res) => {
-                    dispatch(addTask(res.data));
-                })
-            reset()
-        } catch (e) {
-            console.warn(e);
-        }
+
+        sendTaskAPI(data)
+            .then((res) => {
+                dispatch(addTask(res.data));
+            })
+            .catch((error) => {
+                console.warn(error);
+            })
+        reset()
+        
     }
 
 
-
-    
     return (
         <>
             {errors?.task?.message && <span style={{ color: 'red' }}>Maximum 255 characters available</span>}

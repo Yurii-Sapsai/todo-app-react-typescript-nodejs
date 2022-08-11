@@ -71,19 +71,20 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
         onSingleClick(e) {
             if (disabled) {
                 (() => {
-                    try {
-                        updateTaskStatusAPI(_id, status)
-                            .then(() => {
-                                dispatch(updateTaskStatus(_id));
-                            })
-                    } catch (e) {
-                        console.warn(e);
-                    }
+
+                    updateTaskStatusAPI(_id, status)
+                        .then(() => {
+                            dispatch(updateTaskStatus(_id));
+                        })
+                        .catch((error) => {
+                            console.warn(error);
+                        })
+
                 })()
             }
         },
         onDoubleClick(e) {
-            
+
             setDisabled(false)
             dispatch(updateTaskStatusFalse(_id))
 
@@ -96,15 +97,17 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
 
     const updateItem = (_id: string, newItem: string) => {
         if (newItem) {
-            try {
-                updateTaskAPI(_id, newItem)
-                    .then(() => {
-                        dispatch(updateTask({ _id, newItem }));
-                        setDisabled(true)
-                    })
-            } catch (e) {
-                console.warn(e);
-            }
+
+            updateTaskAPI(_id, newItem)
+                .then(() => {
+                    dispatch(updateTask({ _id, newItem }));
+                    setDisabled(true)
+                    updateTaskStatusAPI(_id, true)
+                })
+                .catch((error) => {
+                    console.warn(error);
+                })
+
         } else {
             removeItem(_id);
         }
@@ -113,14 +116,15 @@ const TaskItem: FC<TaskItemProps> = ({ task, status, _id }) => {
 
 
     const removeItem = (_id: string) => {
-        try {
-            removeTaskAPI(_id)
-                .then(() => {
-                    dispatch(removeTask(_id));
-                })
-        } catch (e) {
-            console.warn(e);
-        }
+
+        removeTaskAPI(_id)
+            .then(() => {
+                dispatch(removeTask(_id));
+            })
+            .catch((error) => {
+                console.warn(error);
+            })
+
     }
 
 
